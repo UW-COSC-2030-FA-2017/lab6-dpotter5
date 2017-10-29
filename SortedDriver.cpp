@@ -1,4 +1,6 @@
 // SortedDriver.cpp
+//Drake Potter
+//10/27/17
 
 // tom bailey   1445  25 mar 2014
 // Construct sorted sequences and call functions that 
@@ -63,8 +65,27 @@ getWords(size_t numWords, size_t wordLength, string alphabet)
 double
 mostIsolated(vector<double> & number)
 {
-	// STUB  STUB  STUB
-	return -123.456;
+	double distLeft = 0.0;
+	double distRight = 0.0;
+	double distLargest = 0.0;
+	double iso = 0.0;
+	for (int i = 0; i < number.size(); i++)
+	{
+		if (i != number.size() - 1)
+			distRight = number[i + 1] - number[i];
+		else
+			distRight = 0.0;
+		if (i != 0)
+			distLeft = number[i] - number[i - 1];
+		else
+			distLeft = 0.0;
+		if (distLeft + distRight > distLargest)
+		{
+			distLargest = distLeft + distRight;
+			iso = number[i];
+		}
+	}
+	return iso;
 }
 
 
@@ -74,8 +95,23 @@ mostIsolated(vector<double> & number)
 int
 unmatched(list<string> & A, list<string> & B)
 {
-	// STUB  STUB  STUB
-	return -1;
+	int count = 0;
+	list<string>::iterator itB = B.begin();
+	list<string>::iterator itA = A.begin();
+	
+	while (itA != A.end())
+	{
+		if (*itB == *itA)
+			itA++;
+		else if (*itB > *itA)
+		{
+			count++;
+			*itA++;
+		}
+		else
+			itB++;
+	}
+	return count;
 }
 
 
