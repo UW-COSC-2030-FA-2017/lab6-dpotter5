@@ -1,6 +1,6 @@
 // SortedDriver.cpp
 //Drake Potter
-//10/27/17
+//10/29/17
 
 // tom bailey   1445  25 mar 2014
 // Construct sorted sequences and call functions that 
@@ -68,7 +68,7 @@ mostIsolated(vector<double> & number)
 	double distLeft = 0.0;
 	double distRight = 0.0;
 	double distLargest = 0.0;
-	double iso = 0.0;
+	int iso = 0;
 	for (int i = 0; i < number.size(); i++)
 	{
 		if (i != number.size() - 1)
@@ -79,13 +79,25 @@ mostIsolated(vector<double> & number)
 			distLeft = number[i] - number[i - 1];
 		else
 			distLeft = 0.0;
-		if (distLeft + distRight > distLargest)
+
+		if (distLeft > distRight)
 		{
-			distLargest = distLeft + distRight;
-			iso = number[i];
+			if (distRight > distLargest)
+			{
+				distLargest = distRight;
+				iso = i;
+			}
+
 		}
+		else if (distLeft > distLargest)
+		{
+			distLargest = distLeft;
+			iso = i;
+		}
+
+
 	}
-	return iso;
+	return number[iso];
 }
 
 
